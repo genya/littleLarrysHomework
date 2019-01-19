@@ -1,6 +1,6 @@
 # Allows one to plot many data points with many different customizations (marker size, color, legend label etc),
 # without writing code. Instead the customizations are specified by the input spreadsheets, in which each row is
-# a data point (run code without inputs for instructions). Documentation and variable names assume plotting of
+# a data point (run code without inputs to see instructions). Documentation and variable names assume plotting of
 # CRISPR score data but can be used generically.
 #
 # MIT License
