@@ -1,11 +1,11 @@
 # Allows one to plot many data points with many different customizations (marker size, color, legend label etc),
 # without writing code. Instead the customizations are specified by the input spreadsheets, in which each row is
-# a data point (run code without inputs to see instructions). Documentation and variable names assume plotting of
-# CRISPR score data but can be used generically. Only tested for Python 2.7 and Matplotlib 2.2.3.
+# a data point (run code without inputs for instructions). Documentation and variable names assume plotting of
+# CRISPR score data but can be used generically.
 #
 # MIT License
 #
-# Copyright (c) 2019 Evgeni (Genya) Frenkel, genya@wi.mit.edu
+# Copyright (c) 2019 Evgeni (Genya) Frenkel
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,9 @@
 
 import sys
 import matplotlib.pyplot as plt
+import os.path
+
+outputFileBaseName = 'scatter'
 
 #plot spec file column names
 colNames = ['Gene name', 'Plot or not?', 'Color', 'Marker', 'Size', 'Alpha', 'Layer', 'Label or not?',
@@ -208,5 +211,18 @@ plt.ylim(ylim)
 ax.set_aspect(aspect='equal')
 plt.tight_layout()
 
-plt.savefig('scatter.svg')
-plt.savefig('scatter.png',dpi=500)
+#save plot to png, svg files
+if os.path.isfile(outputFileBaseName + '.png') or os.path.isfile(outputFileBaseName + '.svg'):
+    fileInd = 0
+    while True:
+        newOutputFileBaseName = outputFileBaseName + '_' + str(fileInd)
+        if os.path.isfile(newOutputFileBaseName + '.png') or os.path.isfile(newOutputFileBaseName + '.svg'):
+            fileInd += 1
+            newOutputFileBaseName = outputFileBaseName + '_' + str(fileInd)
+        else:
+            plt.savefig(newOutputFileBaseName + '.svg')
+            plt.savefig(newOutputFileBaseName + '.png',dpi=500)
+            break
+else:
+    plt.savefig(outputFileBaseName + '.svg')
+    plt.savefig(outputFileBaseName+ '.png', dpi=500)
