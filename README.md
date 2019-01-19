@@ -1,5 +1,4 @@
 # littleLarrysHomework
-scripts I write for myself and friends
 
 To test the plotScatter code do:
 
